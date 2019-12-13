@@ -15,6 +15,7 @@ type Blog {
   likes: Int!
   createdAt: Date!
   user: User
+  comments: [Comment!]
 }
 
 type BlogResolverReturnType {
