@@ -3,6 +3,7 @@ import { IUserResolverReturnType } from "../../../@types/ReturnTypes";
 import User, { IUser } from "../../../models/User";
 
 export const Query: IQueryType = {
+  hello: () => "Hello",
   // user queries
   user: async (_, { id }): Promise<IUserResolverReturnType> => {
     const user: IUser = await User.findById(id);
