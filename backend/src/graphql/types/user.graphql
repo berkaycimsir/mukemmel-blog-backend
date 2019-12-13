@@ -1,7 +1,8 @@
 scalar Date
 
 type Query {
-  hello: String!
+  user(id: ID!): UserResolverReturnType!
+  users: [User!]
 }
 
 type User {
