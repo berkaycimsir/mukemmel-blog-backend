@@ -9,13 +9,11 @@ import databaseConnection from "./helpers/db";
 // graphql resolvers
 import resolvers from "./graphql/resolvers/index";
 
+// Database Models
+import User from "./models/User";
+
 // dotenv setup
 dotenv.config();
-
-// graphql type definition
-const typeDefs: string = importSchema("src/graphql/schema.graphql");
-// make schema that includes our resolvers and typeDefs
-const schema: GraphQLSchema = makeExecutableSchema({ typeDefs, resolvers });
 
 // express app
 const app: Application = express();
@@ -23,9 +21,17 @@ const app: Application = express();
 // database connection
 databaseConnection({ db: process.env.DB_URI });
 
+// graphql type definition
+const typeDefs: string = importSchema("src/graphql/schema.graphql");
+// make schema that includes our resolvers and typeDefs
+const schema: GraphQLSchema = makeExecutableSchema({ typeDefs, resolvers });
+
 // apollo server
 const server: ApolloServer = new ApolloServer({
   schema,
+  context: {
+    User
+  },
   introspection: true,
   playground: true
 });
