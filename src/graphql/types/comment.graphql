@@ -29,5 +29,4 @@ input createCommentInput {
   user_id: ID!
   title: String!
   content: String!
-  likes: Int!
 }
