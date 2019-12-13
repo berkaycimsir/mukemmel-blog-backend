@@ -1,13 +1,14 @@
 import { IQueryType } from "../../../@types/ResolverTypes";
 import {
   IUserResolverReturnType,
-  IBlogResolverReturnType
+  IBlogResolverReturnType,
+  ICommentResolverReturnType
 } from "../../../@types/ReturnTypes";
 import User, { IUser } from "../../../models/User";
 import Blog, { IBlog } from "../../../models/Blog";
+import Comment, { IComment } from "../../../models/Comment";
 
 export const Query: IQueryType = {
-  hello: () => "String",
   // user queries
   user: async (_, { id }): Promise<IUserResolverReturnType> => {
     const user: IUser = await User.findById(id);
@@ -47,5 +48,22 @@ export const Query: IQueryType = {
     return blogs.sort(
       (a, b) => Number(a.createdAt) - Number(b.createdAt) > 0 && -1
     );
+  },
+
+  // comment queries
+  comment: async (_, { id }): Promise<ICommentResolverReturnType> => {
+    const comment: IComment = await Comment.findById(id);
+
+    if (!comment) {
+      return {
+        comment: null,
+        errorMessage: "Comment does not exists."
+      };
+    }
+
+    return {
+      comment,
+      errorMessage: "No error."
+    };
   }
 };

@@ -2,7 +2,7 @@ scalar Date
 scalar Int
 
 type Query {
-  hello: String!
+  comment(id: ID!): CommentResolverReturnType!
 }
 
 type Comment {
