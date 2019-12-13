@@ -21,6 +21,7 @@ type UserResolverReturnType {
 
 type Mutation {
   register(data: registerInput!): UserResolverReturnType!
+  login(data: loginInput!): UserResolverReturnType!
 }
 
 input registerInput {
@@ -28,5 +29,10 @@ input registerInput {
   surname: String!
   username: String!
   email: String!
+  password: String!
+}
+
+input loginInput {
+  username: String!
   password: String!
 }

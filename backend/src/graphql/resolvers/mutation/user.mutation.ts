@@ -70,5 +70,37 @@ export const userMutation: IMutationType = {
       user: createdUser,
       errorMessage: "No error."
     };
+  },
+  login: async (_, { data }): Promise<IUserResolverReturnType> => {
+    const {
+      username,
+      password
+    }: {
+      username: string;
+      password: string;
+    } = data;
+
+    const user: IUser = await User.findOne({ username });
+
+    if (!user) {
+      return {
+        user: null,
+        errorMessage: "This user does not exists."
+      };
+    }
+
+    const validPassword: boolean = bcrypt.compareSync(password, user.password);
+
+    if (validPassword === false) {
+      return {
+        user: null,
+        errorMessage: "Your password is not correct."
+      };
+    }
+
+    return {
+      user,
+      errorMessage: "No error."
+    };
   }
 };
