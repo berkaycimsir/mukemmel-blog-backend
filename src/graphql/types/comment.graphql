@@ -1,0 +1,33 @@
+scalar Date
+scalar Int
+
+type Query {
+  hello: String!
+}
+
+type Comment {
+  id: ID!
+  blog_id: ID!
+  user_id: ID!
+  title: String!
+  content: String!
+  likes: Int!
+  createdAt: Date!
+}
+
+type CommentResolverReturnType {
+  comment: Comment
+  errorMessage: String!
+}
+
+type Mutation {
+  createComment(data: createCommentInput!): CommentResolverReturnType!
+}
+
+input createCommentInput {
+  blog_id: ID!
+  user_id: ID!
+  title: String!
+  content: String!
+  likes: Int!
+}
