@@ -15,3 +15,12 @@ export type Blog = {
   likes: number;
   createdAt: Date;
 };
+
+export type Comment = {
+  id?: string;
+  blog_id: string;
+  user_id: string;
+  content: string;
+  likes: number;
+  createdAt: Date;
+};

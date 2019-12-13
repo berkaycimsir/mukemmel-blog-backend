@@ -7,6 +7,7 @@ import User, { IUser } from "../../../models/User";
 import Blog, { IBlog } from "../../../models/Blog";
 
 export const Query: IQueryType = {
+  hello: () => "String",
   // user queries
   user: async (_, { id }): Promise<IUserResolverReturnType> => {
     const user: IUser = await User.findById(id);
