@@ -6,3 +6,12 @@ export type User = {
   password?: string;
   createdAt: Date;
 };
+
+export type Blog = {
+  owner_id: string;
+  title: string;
+  content: string;
+  tags: [string];
+  likes: number;
+  createdAt: Date;
+};
