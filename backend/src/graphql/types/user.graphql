@@ -1,3 +1,32 @@
+scalar Date
+
 type Query {
   hello: String!
+}
+
+type User {
+  id: ID!
+  name: String!
+  surname: String!
+  username: String!
+  email: String!
+  password: String!
+  createdAt: Date!
+}
+
+type UserResolverReturnType {
+  user: User
+  errorMessage: String!
+}
+
+type Mutation {
+  register(data: registerInput!): UserResolverReturnType!
+}
+
+input registerInput {
+  name: String!
+  surname: String!
+  username: String!
+  email: String!
+  password: String!
 }
