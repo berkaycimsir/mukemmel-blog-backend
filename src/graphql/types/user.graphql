@@ -13,6 +13,8 @@ type User {
   email: String!
   password: String!
   createdAt: Date!
+  comments: [Comment!]
+  blogs: [Blog!]
 }
 
 type UserResolverReturnType {
