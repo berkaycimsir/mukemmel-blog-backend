@@ -53,5 +53,22 @@ export const commentMutation: IMutationType = {
       comment: createdComment,
       errorMessage: "No error."
     };
+  },
+  deleteComment: async (_, { id }): Promise<ICommentResolverReturnType> => {
+    const comment: IComment = await Comment.findById(id);
+
+    if (!comment) {
+      return {
+        comment: null,
+        errorMessage: "Comment does not found"
+      };
+    }
+
+    await Comment.remove(comment);
+
+    return {
+      comment: null,
+      errorMessage: "No error."
+    };
   }
 };
