@@ -1,2 +1,3 @@
 # mukemmel-blog-backend
-my mukemmel-blog project's backend
+
+this repository is backend of my https://github.com/berkaycimsir/mukemmel-blog project.
