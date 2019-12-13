@@ -13,6 +13,8 @@ type Comment {
   content: String!
   likes: Int!
   createdAt: Date!
+  user: User
+  blog: Blog
 }
 
 type CommentResolverReturnType {
