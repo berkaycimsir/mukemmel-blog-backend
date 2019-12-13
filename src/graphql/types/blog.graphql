@@ -14,6 +14,7 @@ type Blog {
   tags: [String]!
   likes: Int!
   createdAt: Date!
+  user: User
 }
 
 type BlogResolverReturnType {
