@@ -1,10 +1,16 @@
 import { ApolloServer } from "apollo-server-express";
+import dotenv from "dotenv";
 import express, { Application } from "express";
 import { GraphQLSchema } from "graphql";
 import { importSchema } from "graphql-import";
 import { makeExecutableSchema } from "graphql-tools";
+// database connection function
+import databaseConnection from "./helpers/db";
 // graphql resolvers
 import resolvers from "./graphql/resolvers/index";
+
+// dotenv setup
+dotenv.config();
 
 // graphql type definition
 const typeDefs: string = importSchema("src/graphql/schema.graphql");
@@ -13,6 +19,9 @@ const schema: GraphQLSchema = makeExecutableSchema({ typeDefs, resolvers });
 
 // express app
 const app: Application = express();
+
+// database connection
+databaseConnection({ db: process.env.DB_URI });
 
 // apollo server
 const server: ApolloServer = new ApolloServer({
