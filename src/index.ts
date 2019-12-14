@@ -34,10 +34,15 @@ const server: ApolloServer = new ApolloServer({
   playground: true
 });
 
-app.use(cors());
-
 // applying express server as a middleware to the apollo server
-server.applyMiddleware({ app, path: "/graphql", cors: false });
+server.applyMiddleware({
+  app,
+  path: "/graphql",
+  cors: {
+    origin: true,
+    credentials: true
+  }
+});
 
 // starting server
 app.listen(process.env.PORT || 4000, () => {
