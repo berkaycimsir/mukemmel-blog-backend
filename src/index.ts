@@ -1,5 +1,4 @@
 import { ApolloServer } from "apollo-server-express";
-import cors from "cors";
 import dotenv from "dotenv";
 import express, { Application } from "express";
 import { GraphQLSchema } from "graphql";
@@ -9,9 +8,6 @@ import { makeExecutableSchema } from "graphql-tools";
 import databaseConnection from "./helpers/db";
 // graphql resolvers
 import resolvers from "./graphql/resolvers/index";
-
-// Database Models
-import User from "./models/User";
 
 // dotenv setup
 dotenv.config();
