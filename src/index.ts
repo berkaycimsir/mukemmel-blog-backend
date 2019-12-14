@@ -1,4 +1,5 @@
 import { ApolloServer } from "apollo-server-express";
+import cors from "cors";
 import dotenv from "dotenv";
 import express, { Application } from "express";
 import { GraphQLSchema } from "graphql";
@@ -32,6 +33,8 @@ const server: ApolloServer = new ApolloServer({
   introspection: true,
   playground: true
 });
+
+app.use(cors());
 
 // applying express server as a middleware to the apollo server
 server.applyMiddleware({ app, path: "/graphql", cors: false });
