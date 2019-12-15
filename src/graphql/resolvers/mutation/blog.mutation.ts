@@ -10,6 +10,7 @@ export const blogMutation: IMutationType = {
       content,
       tags,
       likes,
+      views,
       img
     }: {
       owner_id: string;
@@ -17,6 +18,7 @@ export const blogMutation: IMutationType = {
       content: string;
       tags: [string];
       likes: number;
+      views: number;
       img: string;
     } = data;
 
@@ -60,6 +62,7 @@ export const blogMutation: IMutationType = {
       content,
       tags,
       likes,
+      views,
       img,
       createdAt: new Date(Date.now())
     });

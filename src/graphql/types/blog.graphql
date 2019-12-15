@@ -3,6 +3,7 @@ scalar Int
 
 type Query {
   blog(id: ID!): BlogResolverReturnType!
+  getLastFourBlogs: [Blog!]
   blogs: [Blog!]
 }
 
@@ -13,6 +14,7 @@ type Blog {
   content: String!
   tags: [String]!
   likes: Int!
+  views: Int!
   img: String!
   createdAt: Date!
   user: User
@@ -34,5 +36,6 @@ input createBlogInput {
   content: String!
   tags: [String!]!
   likes: Int!
+  views: Int!
   img: String!
 }

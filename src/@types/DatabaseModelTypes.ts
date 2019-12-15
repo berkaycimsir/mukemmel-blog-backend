@@ -14,6 +14,7 @@ export type Blog = {
   tags: [string];
   likes: number;
   img: string;
+  views: number;
   createdAt: Date;
 };
 
