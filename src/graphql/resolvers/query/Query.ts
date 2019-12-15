@@ -50,13 +50,23 @@ export const Query: IQueryType = {
     );
   },
   getLastFourBlog: async (): Promise<IBlog[]> => {
-    const blogs: IBlog[] = await Blog.find({});
-    const sortedBlogs: IBlog[] = blogs.sort(
+    const allBlogs: IBlog[] = await Blog.find({});
+
+    const sortedBlogs: IBlog[] = allBlogs.sort(
       (a, b) => Number(a.createdAt) - Number(b.createdAt) > 0 && -1
     );
 
-    const lastFourBlog: IBlog[] = sortedBlogs.slice(0, 4);
-    return lastFourBlog;
+    const blogs: IBlog[] = sortedBlogs.slice(0, 4);
+    return blogs;
+  },
+  getTrendBlogs: async (): Promise<IBlog[]> => {
+    const allBlogs: IBlog[] = await Blog.find({});
+
+    const trendBlogs = allBlogs
+      .filter(blog => blog.views > 20)
+      .sort((a, b) => Number(a.views) > Number(b.views) && -1);
+
+    return trendBlogs;
   },
 
   // comment queries
