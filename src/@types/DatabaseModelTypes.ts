@@ -13,6 +13,7 @@ export type Blog = {
   content: string;
   tags: [string];
   likes: number;
+  img: string;
   createdAt: Date;
 };
 

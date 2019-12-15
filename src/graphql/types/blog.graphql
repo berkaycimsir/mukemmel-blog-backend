@@ -13,6 +13,7 @@ type Blog {
   content: String!
   tags: [String]!
   likes: Int!
+  img: String!
   createdAt: Date!
   user: User
   comments: [Comment!]
@@ -33,4 +34,5 @@ input createBlogInput {
   content: String!
   tags: [String!]!
   likes: Int!
+  img: String!
 }

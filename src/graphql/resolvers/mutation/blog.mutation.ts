@@ -9,23 +9,34 @@ export const blogMutation: IMutationType = {
       title,
       content,
       tags,
-      likes
+      likes,
+      img
     }: {
       owner_id: string;
       title: string;
       content: string;
       tags: [string];
       likes: number;
+      img: string;
     } = data;
 
     const blog: IBlog = await Blog.findOne({
       title: title.toUpperCase() || title
     });
 
+    const findBlogByImg = await Blog.findOne({ img });
+
     if (blog) {
       return {
         blog: null,
         errorMessage: "Title already exists."
+      };
+    }
+
+    if (findBlogByImg) {
+      return {
+        blog: null,
+        errorMessage: "Image already taken."
       };
     }
 
@@ -49,6 +60,7 @@ export const blogMutation: IMutationType = {
       content,
       tags,
       likes,
+      img,
       createdAt: new Date(Date.now())
     });
 

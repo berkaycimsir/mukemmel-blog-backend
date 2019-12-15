@@ -1,4 +1,5 @@
 import mongoose, { Schema, Document } from "mongoose";
+import { StringifyOptions } from "querystring";
 
 // my typescript interface for my Database User model
 export interface IBlog extends Document {
@@ -7,6 +8,7 @@ export interface IBlog extends Document {
   content: string;
   tags: [string];
   likes: number;
+  img: string;
   createdAt: Date;
 }
 
@@ -14,9 +16,10 @@ export interface IBlog extends Document {
 const BlogSchema: Schema = new Schema({
   owner_id: { type: String, required: true },
   title: { type: String, required: true, maxlength: 45 },
-  content: { type: String, required: true, unique: true, maxlength: 1000 },
+  content: { type: String, required: true, maxlength: 1000 },
   tags: { type: Array },
   likes: { type: Number, default: 0 },
+  img: { type: String, required: true, unique: true },
   createdAt: { type: Date, default: Date.now() }
 });
 
