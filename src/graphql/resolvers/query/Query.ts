@@ -49,13 +49,13 @@ export const Query: IQueryType = {
       (a, b) => Number(a.createdAt) - Number(b.createdAt) > 0 && -1
     );
   },
-  getLastFourBlogs: async (): Promise<IBlog[]> => {
-    const blogs = await Blog.find({});
+  getLastFourBlog: async (): Promise<IBlog[]> => {
+    const blogs: IBlog[] = await Blog.find({});
     const sortedBlogs: IBlog[] = blogs.sort(
       (a, b) => Number(a.createdAt) - Number(b.createdAt) > 0 && -1
     );
 
-    const lastFourBlog = sortedBlogs.slice(0, 4);
+    const lastFourBlog: IBlog[] = sortedBlogs.slice(0, 4);
     return lastFourBlog;
   },
 
