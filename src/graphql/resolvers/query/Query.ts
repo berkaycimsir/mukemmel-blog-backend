@@ -66,7 +66,7 @@ export const Query: IQueryType = {
       .filter(blog => blog.views > 20)
       .sort((a, b) => Number(a.views) > Number(b.views) && -1);
 
-    return trendBlogs;
+    return trendBlogs.slice(0, 5);
   },
   getMostTrendBlog: async (): Promise<IBlogResolverReturnType> => {
     const allBlogs: IBlog[] = await Blog.find({});
