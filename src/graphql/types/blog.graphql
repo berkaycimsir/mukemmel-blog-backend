@@ -3,6 +3,7 @@ scalar Int
 
 type Query {
   blog(id: ID!): BlogResolverReturnType!
+  getMostTrendBlog: BlogResolverReturnType!
   getLastFourBlog: [Blog!]
   getTrendBlogs: [Blog!]
   blogs: [Blog!]

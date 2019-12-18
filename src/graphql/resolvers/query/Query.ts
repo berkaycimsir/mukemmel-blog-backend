@@ -68,6 +68,23 @@ export const Query: IQueryType = {
 
     return trendBlogs;
   },
+  getMostTrendBlog: async (): Promise<IBlogResolverReturnType> => {
+    const allBlogs: IBlog[] = await Blog.find({});
+
+    const mostTrendBlogViews: number = Math.max.apply(
+      Math,
+      allBlogs.map(blog => blog.views)
+    );
+
+    const mostTrendBlog: IBlog = await Blog.findOne({
+      views: mostTrendBlogViews
+    });
+
+    return {
+      blog: mostTrendBlog,
+      errorMessage: "No error."
+    };
+  },
 
   // comment queries
   comment: async (_, { id }): Promise<ICommentResolverReturnType> => {
