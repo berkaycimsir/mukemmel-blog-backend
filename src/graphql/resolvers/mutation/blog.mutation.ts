@@ -49,10 +49,10 @@ export const blogMutation: IMutationType = {
       };
     }
 
-    if (content.length > 1000) {
+    if (content.length > 10000) {
       return {
         blog: null,
-        errorMessage: "Your content longer than 1000 characters."
+        errorMessage: "Your content longer than 10000 characters."
       };
     }
 

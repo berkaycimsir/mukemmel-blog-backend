@@ -1,12 +1,12 @@
 import { IQueryType } from "../../../@types/ResolverTypes";
+import User, { IUser } from "../../../models/User";
+import Blog, { IBlog } from "../../../models/Blog";
+import Comment, { IComment } from "../../../models/Comment";
 import {
   IUserResolverReturnType,
   IBlogResolverReturnType,
   ICommentResolverReturnType
 } from "../../../@types/ReturnTypes";
-import User, { IUser } from "../../../models/User";
-import Blog, { IBlog } from "../../../models/Blog";
-import Comment, { IComment } from "../../../models/Comment";
 
 export const Query: IQueryType = {
   // user queries
