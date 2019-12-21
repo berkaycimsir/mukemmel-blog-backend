@@ -1,10 +1,11 @@
 import * as bcrypt from "bcrypt";
 import { IMutationType } from "../../../@types/ResolverTypes";
-import { IUserResolverReturnType } from "../../../@types/ReturnTypes";
+import { IUserMutationResolverReturnType } from "../../../@types/ReturnTypes";
 import User, { IUser } from "../../../models/User";
+import token from "../../../helpers/token";
 
 export const userMutation: IMutationType = {
-  register: async (_, { data }): Promise<IUserResolverReturnType> => {
+  register: async (_, { data }): Promise<IUserMutationResolverReturnType> => {
     const {
       name,
       surname,
@@ -35,28 +36,34 @@ export const userMutation: IMutationType = {
 
     if (authBoth) {
       return {
-        user: null,
+        token: {
+          token: null
+        },
         errorMessage: "User already exists."
       };
     }
 
     if (authUsername) {
       return {
-        user: null,
+        token: {
+          token: null
+        },
         errorMessage: "Username is already taken."
       };
     }
 
     if (authEmail) {
       return {
-        user: null,
+        token: {
+          token: null
+        },
         errorMessage: "Email is already taken."
       };
     }
 
     const hashedPassword: string = bcrypt.hashSync(password, 10);
 
-    await User.create({
+    const newUser = await User.create({
       name,
       surname,
       username,
@@ -64,14 +71,14 @@ export const userMutation: IMutationType = {
       password: hashedPassword
     });
 
-    const createdUser: IUser = await User.findOne({ username });
-
     return {
-      user: createdUser,
+      token: {
+        token: token.generate(newUser, "12h")
+      },
       errorMessage: "No error."
     };
   },
-  login: async (_, { data }): Promise<IUserResolverReturnType> => {
+  login: async (_, { data }): Promise<IUserMutationResolverReturnType> => {
     const {
       username,
       password
@@ -84,7 +91,9 @@ export const userMutation: IMutationType = {
 
     if (!user) {
       return {
-        user: null,
+        token: {
+          token: null
+        },
         errorMessage: "This user does not exists."
       };
     }
@@ -93,13 +102,17 @@ export const userMutation: IMutationType = {
 
     if (validPassword === false) {
       return {
-        user: null,
+        token: {
+          token: null
+        },
         errorMessage: "Your password is not correct."
       };
     }
 
     return {
-      user,
+      token: {
+        token: token.generate(user, "12h")
+      },
       errorMessage: "No error."
     };
   }

@@ -3,14 +3,14 @@ import User, { IUser } from "../../../models/User";
 import Blog, { IBlog } from "../../../models/Blog";
 import Comment, { IComment } from "../../../models/Comment";
 import {
-  IUserResolverReturnType,
   IBlogResolverReturnType,
-  ICommentResolverReturnType
+  ICommentResolverReturnType,
+  IUserQueryResolverReturnType
 } from "../../../@types/ReturnTypes";
 
 export const Query: IQueryType = {
   // user queries
-  user: async (_, { id }): Promise<IUserResolverReturnType> => {
+  user: async (_, { id }): Promise<IUserQueryResolverReturnType> => {
     const user: IUser = await User.findById(id);
 
     if (!user) {
@@ -26,6 +26,23 @@ export const Query: IQueryType = {
     };
   },
   users: async (): Promise<IUser[]> => await User.find({}),
+  activeUser: async (
+    parent,
+    args,
+    { activeUser }
+  ): Promise<IUserQueryResolverReturnType> => {
+    if (!activeUser) {
+      return {
+        user: null,
+        errorMessage: "No ActiveUser"
+      };
+    }
+
+    return {
+      user: await User.findOne({ username: activeUser.username }),
+      errorMessage: "No error."
+    };
+  },
 
   // blog queries
   blog: async (_, { id }): Promise<IBlogResolverReturnType> => {

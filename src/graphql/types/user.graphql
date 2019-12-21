@@ -1,7 +1,8 @@
 scalar Date
 
 type Query {
-  user(id: ID!): UserResolverReturnType!
+  user(id: ID!): UserQueryResolverReturnType!
+  activeUser: UserQueryResolverReturnType!
   users: [User!]
 }
 
@@ -17,14 +18,19 @@ type User {
   blogs: [Blog!]
 }
 
-type UserResolverReturnType {
+type UserQueryResolverReturnType {
   user: User
   errorMessage: String!
 }
 
+type UserMutationResolverReturnType {
+  token: Token!
+  errorMessage: String!
+}
+
 type Mutation {
-  register(data: registerInput!): UserResolverReturnType!
-  login(data: loginInput!): UserResolverReturnType!
+  register(data: registerInput!): UserMutationResolverReturnType!
+  login(data: loginInput!): UserMutationResolverReturnType!
 }
 
 input registerInput {

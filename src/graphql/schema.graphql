@@ -9,3 +9,5 @@
 # import Query from "./types/comment.graphql";
 # import Comment from "./types/comment.graphql";
 # import Mutation from "./types/comment.graphql";
+
+# import Token from "./types/token.graphql";

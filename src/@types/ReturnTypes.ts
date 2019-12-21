@@ -1,7 +1,16 @@
 import { User, Blog, Comment } from "./DatabaseModelTypes";
 
-export interface IUserResolverReturnType {
+type Token = {
+  token: string;
+};
+
+export interface IUserQueryResolverReturnType {
   user: User;
+  errorMessage: string;
+}
+
+export interface IUserMutationResolverReturnType {
+  token: Token;
   errorMessage: string;
 }
 
