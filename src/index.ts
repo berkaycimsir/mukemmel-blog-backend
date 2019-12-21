@@ -4,6 +4,7 @@ import express, { Application } from "express";
 import { GraphQLSchema } from "graphql";
 import { importSchema } from "graphql-import";
 import { makeExecutableSchema } from "graphql-tools";
+import * as jwt from "jsonwebtoken";
 // database connection function
 import databaseConnection from "./helpers/db";
 // graphql resolvers
@@ -26,8 +27,27 @@ const schema: GraphQLSchema = makeExecutableSchema({ typeDefs, resolvers });
 // apollo server
 const server: ApolloServer = new ApolloServer({
   schema,
+  context: ({ req }) => ({
+    activeUser: req ? req.headers.activeUser : null
+  }),
   introspection: true,
   playground: true
+});
+
+app.use((req, res, next) => {
+  const { authorization } = req.headers;
+  const token: any = authorization;
+
+  if (token && token !== "null") {
+    try {
+      const activeUser: any = jwt.verify(token, "berkaycokyakisikli");
+      req.headers.activeUser = activeUser;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  next();
 });
 
 // applying express server as a middleware to the apollo server
