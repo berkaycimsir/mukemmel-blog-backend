@@ -40,7 +40,7 @@ app.use((req, res, next) => {
 
   if (token && token !== "null") {
     try {
-      const activeUser: any = jwt.verify(token, "berkaycokyakisikli");
+      const activeUser: any = jwt.verify(token, process.env.JWT_SECRET_KEY);
       req.headers.activeUser = activeUser;
     } catch (error) {
       console.error(error);
