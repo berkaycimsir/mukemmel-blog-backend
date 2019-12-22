@@ -11,13 +11,15 @@ export const userMutation: IMutationType = {
       surname,
       username,
       email,
-      password
+      password,
+      gender
     }: {
       name: string;
       surname: string;
       username: string;
       email: string;
       password: string;
+      gender: string;
     } = data;
 
     const authBoth: IUser = await User.findOne({ username, email }).then(
@@ -68,7 +70,8 @@ export const userMutation: IMutationType = {
       surname,
       username,
       email,
-      password: hashedPassword
+      password: hashedPassword,
+      gender
     });
 
     return {

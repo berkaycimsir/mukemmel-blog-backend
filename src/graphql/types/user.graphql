@@ -13,6 +13,7 @@ type User {
   username: String!
   email: String!
   password: String!
+  gender: String!
   createdAt: Date!
   comments: [Comment!]
   blogs: [Blog!]
@@ -39,6 +40,7 @@ input registerInput {
   username: String!
   email: String!
   password: String!
+  gender: String!
 }
 
 input loginInput {
