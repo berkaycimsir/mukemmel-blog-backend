@@ -7,6 +7,12 @@ export const Blog: IQueryType = {
     return await User.findById(parent.owner_id);
   },
   comments: async (parent): Promise<IComment[]> => {
-    return await Comment.find({ blog_id: parent.id });
+    const comments: IComment[] = await Comment.find({ blog_id: parent.id });
+
+    const sortedComments = comments.sort(
+      (a: any, b: any) => Number(a.createdAt) - Number(b.createdAt) > 0 && -1
+    );
+
+    return sortedComments;
   }
 };
