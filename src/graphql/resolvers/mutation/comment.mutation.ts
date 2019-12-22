@@ -1,6 +1,7 @@
 import { IMutationType } from "../../../@types/ResolverTypes";
 import { ICommentResolverReturnType } from "../../../@types/ReturnTypes";
 import Comment, { IComment } from "../../../models/Comment";
+import User from "../../../models/User";
 
 export const commentMutation: IMutationType = {
   createComment: async (_, { data }): Promise<ICommentResolverReturnType> => {
@@ -16,12 +17,12 @@ export const commentMutation: IMutationType = {
       content: string;
     } = data;
 
-    const comment = await Comment.findOne({ title });
+    const comment = await Comment.findOne({ user_id });
 
     if (comment) {
       return {
         comment: null,
-        errorMessage: "Comment title exists."
+        errorMessage: "This user already has comment."
       };
     }
 
