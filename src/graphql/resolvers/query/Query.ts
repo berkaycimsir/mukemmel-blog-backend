@@ -118,5 +118,23 @@ export const Query: IQueryType = {
       comment,
       errorMessage: "No error."
     };
+  },
+  getCommentByUserId: async (
+    parent,
+    { user_id }
+  ): Promise<ICommentResolverReturnType> => {
+    const comment: IComment = await Comment.findOne({ user_id });
+
+    if (!comment) {
+      return {
+        comment: null,
+        errorMessage: "Comment not found."
+      };
+    }
+
+    return {
+      comment,
+      errorMessage: "No error."
+    };
   }
 };

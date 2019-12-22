@@ -3,6 +3,7 @@ scalar Int
 
 type Query {
   comment(id: ID!): CommentResolverReturnType!
+  getCommentByUserId(user_id: ID!): CommentResolverReturnType!
 }
 
 type Comment {
