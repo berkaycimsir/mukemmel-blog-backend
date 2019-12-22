@@ -65,7 +65,7 @@ export const commentMutation: IMutationType = {
       };
     }
 
-    await Comment.deleteOne(comment);
+    await Comment.remove(comment);
 
     return {
       comment: null,
