@@ -8,12 +8,10 @@ export const commentMutation: IMutationType = {
     const {
       blog_id,
       user_id,
-      title,
       content
     }: {
       blog_id: string;
       user_id: string;
-      title: string;
       content: string;
     } = data;
 
@@ -26,13 +24,6 @@ export const commentMutation: IMutationType = {
       };
     }
 
-    if (title.length > 20) {
-      return {
-        comment: null,
-        errorMessage: "Your title longer than 20 characters."
-      };
-    }
-
     if (content.length > 100) {
       return {
         comment: null,
@@ -40,15 +31,12 @@ export const commentMutation: IMutationType = {
       };
     }
 
-    await Comment.create({
+    const createdComment = await Comment.create({
       blog_id,
       user_id,
-      title,
       content,
       createdAt: new Date(Date.now())
     });
-
-    const createdComment: IComment = await Comment.findOne({ title });
 
     return {
       comment: createdComment,

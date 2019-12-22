@@ -10,7 +10,6 @@ type Comment {
   id: ID!
   blog_id: ID!
   user_id: ID!
-  title: String!
   content: String!
   likes: Int!
   createdAt: Date!
@@ -31,6 +30,5 @@ type Mutation {
 input createCommentInput {
   blog_id: ID!
   user_id: ID!
-  title: String!
   content: String!
 }
