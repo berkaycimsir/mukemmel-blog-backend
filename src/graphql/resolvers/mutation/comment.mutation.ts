@@ -1,7 +1,6 @@
+import { ICommentResolverReturnType } from "./../../../@types/ReturnTypes";
 import { IMutationType } from "../../../@types/ResolverTypes";
-import { ICommentResolverReturnType } from "../../../@types/ReturnTypes";
 import Comment, { IComment } from "../../../models/Comment";
-import User from "../../../models/User";
 
 export const commentMutation: IMutationType = {
   createComment: async (_, { data }): Promise<ICommentResolverReturnType> => {
@@ -57,6 +56,25 @@ export const commentMutation: IMutationType = {
 
     return {
       comment: null,
+      errorMessage: "No error."
+    };
+  },
+  updateComment: async (_, { data }): Promise<ICommentResolverReturnType> => {
+    const { id, content }: { id: string; content: string } = data;
+
+    const comment = await Comment.findById(id);
+
+    if (!comment) {
+      return {
+        comment: null,
+        errorMessage: "Comment does not found."
+      };
+    }
+
+    return {
+      comment: await Comment.findByIdAndUpdate(id, {
+        content
+      }),
       errorMessage: "No error."
     };
   }
