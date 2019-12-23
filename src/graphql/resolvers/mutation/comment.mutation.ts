@@ -15,7 +15,7 @@ export const commentMutation: IMutationType = {
       content: string;
     } = data;
 
-    const comment = await Comment.findOne({ user_id });
+    const comment = await Comment.findOne({ user_id, blog_id });
 
     if (comment) {
       return {

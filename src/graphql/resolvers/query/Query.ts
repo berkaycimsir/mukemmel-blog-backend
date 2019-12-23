@@ -121,9 +121,9 @@ export const Query: IQueryType = {
   },
   getCommentByUserId: async (
     parent,
-    { user_id }
+    { user_id, blog_id }
   ): Promise<ICommentResolverReturnType> => {
-    const comment: IComment = await Comment.findOne({ user_id });
+    const comment: IComment = await Comment.findOne({ user_id, blog_id });
 
     if (!comment) {
       return {
