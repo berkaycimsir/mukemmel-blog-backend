@@ -77,5 +77,25 @@ export const commentMutation: IMutationType = {
       }),
       errorMessage: "No error."
     };
+  },
+  likeComment: async (_, { id }): Promise<ICommentResolverReturnType> => {
+    const comment = await Comment.findById(id);
+
+    if (!comment) {
+      return {
+        comment: null,
+        errorMessage: "Comment not found."
+      };
+    }
+
+    const commentLikes = comment.likes;
+    const updatedCommentLike = commentLikes + 1;
+
+    return {
+      comment: await Comment.findByIdAndUpdate(id, {
+        likes: updatedCommentLike
+      }),
+      errorMessage: "No error."
+    };
   }
 };
