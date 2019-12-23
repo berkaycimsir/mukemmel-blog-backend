@@ -1,5 +1,6 @@
 scalar Date
 scalar Int
+scalar Boolean
 
 type Query {
   comment(id: ID!): CommentResolverReturnType!
@@ -26,7 +27,7 @@ type Mutation {
   createComment(data: createCommentInput!): CommentResolverReturnType!
   deleteComment(id: ID!): CommentResolverReturnType!
   updateComment(data: updateCommentInput!): CommentResolverReturnType!
-  likeComment(id: ID!): CommentResolverReturnType!
+  likeComment(id: ID!, isUnliking: Boolean!): CommentResolverReturnType!
 }
 
 input createCommentInput {

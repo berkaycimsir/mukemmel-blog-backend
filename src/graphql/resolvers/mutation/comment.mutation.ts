@@ -78,7 +78,10 @@ export const commentMutation: IMutationType = {
       errorMessage: "No error."
     };
   },
-  likeComment: async (_, { id }): Promise<ICommentResolverReturnType> => {
+  likeComment: async (
+    _,
+    { id, isUnliking }
+  ): Promise<ICommentResolverReturnType> => {
     const comment = await Comment.findById(id);
 
     if (!comment) {
@@ -89,7 +92,15 @@ export const commentMutation: IMutationType = {
     }
 
     const commentLikes = comment.likes;
-    const updatedCommentLike = commentLikes + 1;
+    let updatedCommentLike: number;
+
+    if (isUnliking === false) {
+      updatedCommentLike = commentLikes + 1;
+    }
+
+    if (isUnliking === true) {
+      updatedCommentLike = commentLikes - 1;
+    }
 
     return {
       comment: await Comment.findByIdAndUpdate(id, {
