@@ -4,6 +4,7 @@ scalar Boolean
 
 type Query {
   comment(id: ID!): CommentResolverReturnType!
+  comments: [Comment!]
   getCommentByUserId(user_id: ID!, blog_id: ID!): CommentResolverReturnType!
 }
 

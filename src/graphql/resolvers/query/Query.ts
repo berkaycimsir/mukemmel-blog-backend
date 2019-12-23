@@ -119,6 +119,14 @@ export const Query: IQueryType = {
       errorMessage: "No error."
     };
   },
+  comments: async (_): Promise<IComment[]> => {
+    const comments: IComment[] = await Comment.find({});
+    const sortedComments: IComment[] = comments
+      .sort((a, b) => Number(a.createdAt) - Number(b.createdAt) > 0 && -1)
+      .splice(0, 5);
+
+    return sortedComments;
+  },
   getCommentByUserId: async (
     parent,
     { user_id, blog_id }
