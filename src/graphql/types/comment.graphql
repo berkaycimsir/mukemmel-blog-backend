@@ -26,6 +26,7 @@ type Mutation {
   createComment(data: createCommentInput!): CommentResolverReturnType!
   deleteComment(id: ID!): CommentResolverReturnType!
   updateComment(data: updateCommentInput!): CommentResolverReturnType!
+  likeComment(id: ID!): CommentResolverReturnType!
 }
 
 input createCommentInput {
