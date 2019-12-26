@@ -17,6 +17,7 @@ type Blog {
   tags: [String]!
   likes: Int!
   views: Int!
+  category: String!
   img: String!
   createdAt: Date!
   user: User
@@ -39,5 +40,6 @@ input createBlogInput {
   tags: [String!]!
   likes: Int!
   views: Int!
+  category: String!
   img: String!
 }

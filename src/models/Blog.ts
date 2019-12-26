@@ -10,6 +10,7 @@ export interface IBlog extends Document {
   likes: number;
   img: string;
   views: number;
+  category: string;
   createdAt: Date;
 }
 
@@ -22,6 +23,7 @@ const BlogSchema: Schema = new Schema({
   likes: { type: Number, default: 0 },
   img: { type: String, required: true, unique: true },
   views: { type: Number, default: 0 },
+  category: { type: String, required: true },
   createdAt: { type: Date, default: Date.now() }
 });
 

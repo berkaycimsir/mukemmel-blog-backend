@@ -16,6 +16,7 @@ export type Blog = {
   likes: number;
   img: string;
   views: number;
+  category: string;
   createdAt: Date;
 };
 
