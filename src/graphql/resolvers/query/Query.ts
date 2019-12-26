@@ -102,6 +102,13 @@ export const Query: IQueryType = {
       errorMessage: "No error."
     };
   },
+  getBlogByCategory: async (_, args): Promise<IBlog[]> => {
+    const { category }: { category: string } = args;
+
+    const blogs: IBlog[] = await Blog.find({ category });
+
+    return blogs;
+  },
 
   // comment queries
   comment: async (_, { id }): Promise<ICommentResolverReturnType> => {

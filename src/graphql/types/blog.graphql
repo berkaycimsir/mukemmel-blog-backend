@@ -6,6 +6,7 @@ type Query {
   getMostTrendBlog: BlogResolverReturnType!
   getLastFourBlog: [Blog!]
   getTrendBlogs: [Blog!]
+  getBlogByCategory(category: String!): [Blog!]
   blogs: [Blog!]
 }
 
