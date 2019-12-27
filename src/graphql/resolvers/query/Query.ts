@@ -107,6 +107,8 @@ export const Query: IQueryType = {
 
     const blogs: IBlog[] = await Blog.find({ category });
 
+    blogs.sort((a, b) => Number(a.createdAt) > Number(b.createdAt) && -1);
+
     return blogs;
   },
 
