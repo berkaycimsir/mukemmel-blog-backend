@@ -1,4 +1,5 @@
 scalar Date
+scalar Boolean
 
 type Query {
   user(id: ID!): UserQueryResolverReturnType!
@@ -15,6 +16,7 @@ type User {
   password: String!
   gender: String!
   createdAt: Date!
+  admin: Boolean
   comments: [Comment!]
   blogs: [Blog!]
 }
@@ -41,6 +43,7 @@ input registerInput {
   email: String!
   password: String!
   gender: String!
+  admin: Boolean
 }
 
 input loginInput {

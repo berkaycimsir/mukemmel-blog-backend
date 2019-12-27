@@ -6,6 +6,7 @@ export type User = {
   password?: string;
   gender: string;
   createdAt: Date;
+  admin: boolean;
 };
 
 export type Blog = {

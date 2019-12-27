@@ -9,6 +9,7 @@ export interface IUser extends Document {
   password: string;
   gender: string;
   createdAt: Date;
+  admin: boolean;
 }
 
 // my schema
@@ -19,7 +20,8 @@ const UserSchema: Schema = new Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   gender: { type: String, required: true },
-  createdAt: { type: Date, default: Date.now() }
+  createdAt: { type: Date, default: Date.now() },
+  admin: { type: Boolean, default: false }
 });
 
 // export my schema for use.
