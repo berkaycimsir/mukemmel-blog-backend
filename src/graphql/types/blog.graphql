@@ -32,6 +32,7 @@ type BlogResolverReturnType {
 
 type Mutation {
   createBlog(data: createBlogInput!): BlogResolverReturnType!
+  deleteBlog(id: ID!): BlogResolverReturnType!
 }
 
 input createBlogInput {

@@ -78,5 +78,24 @@ export const blogMutation: IMutationType = {
       blog: createdBlog,
       errorMessage: "No error."
     };
+  },
+  deleteBlog: async (_, args): Promise<IBlogResolverReturnType> => {
+    const { id }: { id: string } = args;
+
+    const blog: IBlog = await Blog.findById(id);
+
+    if (!blog) {
+      return {
+        blog: null,
+        errorMessage: "Comment does not found."
+      };
+    }
+
+    await Blog.remove(blog);
+
+    return {
+      blog: null,
+      errorMessage: "No error."
+    };
   }
 };
