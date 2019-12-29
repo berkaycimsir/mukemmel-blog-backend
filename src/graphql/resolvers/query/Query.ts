@@ -25,7 +25,13 @@ export const Query: IQueryType = {
       errorMessage: "No error."
     };
   },
-  users: async (): Promise<IUser[]> => await User.find({}),
+  users: async (): Promise<IUser[]> => {
+    const users: IUser[] = await User.find({});
+
+    return users.sort((a: IUser, b: IUser) => {
+      return Number(a.createdAt) - Number(b.createdAt) > 0 && -1;
+    });
+  },
   activeUser: async (
     parent,
     args,
