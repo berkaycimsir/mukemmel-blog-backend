@@ -8,6 +8,7 @@ export const blogMutation: IMutationType = {
       owner_id,
       title,
       content,
+      summary,
       tags,
       likes,
       views,
@@ -17,6 +18,7 @@ export const blogMutation: IMutationType = {
       owner_id: string;
       title: string;
       content: string;
+      summary: string;
       tags: [string];
       likes: number;
       views: number;
@@ -58,10 +60,18 @@ export const blogMutation: IMutationType = {
       };
     }
 
+    if (summary.length > 200) {
+      return {
+        blog: null,
+        errorMessage: "Your summary longer than 200 characters."
+      };
+    }
+
     await Blog.create({
       owner_id,
       title: title.toUpperCase(),
       content,
+      summary,
       tags,
       likes,
       views,
