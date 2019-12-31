@@ -4,8 +4,6 @@ input createBlogInput {
   content: String!
   summary: String!
   tags: [String!]!
-  likes: Int!
-  views: Int!
   category: String!
   img: String!
 }

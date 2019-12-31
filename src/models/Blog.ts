@@ -18,7 +18,7 @@ export interface IBlog extends Document {
 // my schema
 const BlogSchema: Schema = new Schema({
   owner_id: { type: String, required: true },
-  title: { type: String, required: true, maxlength: 45 },
+  title: { type: String, required: true, maxlength: 40 },
   content: { type: String, required: true, maxlength: 10000 },
   summary: { type: String, required: true, maxlength: 200 },
   tags: { type: Array },

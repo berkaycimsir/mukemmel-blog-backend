@@ -10,8 +10,6 @@ export const blogMutation: IMutationType = {
       content,
       summary,
       tags,
-      likes,
-      views,
       category,
       img
     }: {
@@ -20,8 +18,6 @@ export const blogMutation: IMutationType = {
       content: string;
       summary: string;
       tags: [string];
-      likes: number;
-      views: number;
       category: string;
       img: string;
     } = data;
@@ -73,8 +69,6 @@ export const blogMutation: IMutationType = {
       content,
       summary,
       tags,
-      likes,
-      views,
       category,
       img,
       createdAt: new Date(Date.now())
