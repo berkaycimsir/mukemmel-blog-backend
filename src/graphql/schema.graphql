@@ -1,13 +1,22 @@
-# import Query from "./types/user.graphql";
-# import User from "./types/user.graphql";
-# import Mutation from "./types/user.graphql";
+# import Query from "./types/User/user.graphql";
+# import User from "./types/User/user.graphql";
+# import Mutation from "./types/User/user.graphql";
+# import loginInput from "./types/User/inputs.graphql";
+# import registerInput from "./types/User/inputs.graphql";
+# import UserQueryResolverReturnType from "./types/User/returnType.graphql";
+# import UserMutationResolverReturnType from "./types/User/returnType.graphql";
 
-# import Query from "./types/blog.graphql";
-# import Blog from "./types/blog.graphql";
-# import Mutation from "./types/blog.graphql";
+# import Query from "./types/Blog/blog.graphql";
+# import Blog from "./types/Blog/blog.graphql";
+# import Mutation from "./types/Blog/blog.graphql";
+# import createBlogInput from "./types/Blog/inputs.graphql";
+# import BlogResolverReturnType from "./types/Blog/returnType.graphql";
 
-# import Query from "./types/comment.graphql";
-# import Comment from "./types/comment.graphql";
-# import Mutation from "./types/comment.graphql";
+# import Query from "./types/Comment/comment.graphql";
+# import Comment from "./types/Comment/comment.graphql";
+# import Mutation from "./types/Comment/comment.graphql";
+# import createCommentInput from "./types/Comment/inputs.graphql";
+# import updateCommentInput from "./types/Comment/inputs.graphql";
+# import CommentResolverReturnType from "./types/Comment/returnType.graphql";
 
-# import Token from "./types/token.graphql";
+# import Token from "./types/Token/token.graphql";

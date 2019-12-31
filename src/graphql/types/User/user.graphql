@@ -1,0 +1,27 @@
+scalar Date
+scalar Boolean
+
+type User {
+  id: ID!
+  name: String!
+  surname: String!
+  username: String!
+  email: String!
+  password: String!
+  gender: String!
+  createdAt: Date!
+  admin: Boolean
+  comments: [Comment!]
+  blogs: [Blog!]
+}
+
+type Query {
+  user(id: ID!): UserQueryResolverReturnType!
+  activeUser: UserQueryResolverReturnType!
+  users: [User!]
+}
+
+type Mutation {
+  register(data: registerInput!): UserMutationResolverReturnType!
+  login(data: loginInput!): UserMutationResolverReturnType!
+}

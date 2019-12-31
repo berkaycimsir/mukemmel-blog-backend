@@ -1,0 +1,10 @@
+input createCommentInput {
+  blog_id: ID!
+  user_id: ID!
+  content: String!
+}
+
+input updateCommentInput {
+  id: ID!
+  content: String!
+}

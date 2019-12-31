@@ -1,0 +1,11 @@
+input createBlogInput {
+  owner_id: ID!
+  title: String!
+  content: String!
+  summary: String!
+  tags: [String!]!
+  likes: Int!
+  views: Int!
+  category: String!
+  img: String!
+}

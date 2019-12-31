@@ -1,0 +1,4 @@
+type BlogResolverReturnType {
+  blog: Blog
+  errorMessage: String!
+}

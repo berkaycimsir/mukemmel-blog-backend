@@ -2,12 +2,6 @@ scalar Date
 scalar Int
 scalar Boolean
 
-type Query {
-  comment(id: ID!): CommentResolverReturnType!
-  comments: [Comment!]
-  getCommentByUserId(user_id: ID!, blog_id: ID!): CommentResolverReturnType!
-}
-
 type Comment {
   id: ID!
   blog_id: ID!
@@ -19,9 +13,10 @@ type Comment {
   blog: Blog
 }
 
-type CommentResolverReturnType {
-  comment: Comment
-  errorMessage: String!
+type Query {
+  comment(id: ID!): CommentResolverReturnType!
+  comments: [Comment!]
+  getCommentByUserId(user_id: ID!, blog_id: ID!): CommentResolverReturnType!
 }
 
 type Mutation {
@@ -29,15 +24,4 @@ type Mutation {
   deleteComment(id: ID!): CommentResolverReturnType!
   updateComment(data: updateCommentInput!): CommentResolverReturnType!
   likeComment(id: ID!, isUnliking: Boolean!): CommentResolverReturnType!
-}
-
-input createCommentInput {
-  blog_id: ID!
-  user_id: ID!
-  content: String!
-}
-
-input updateCommentInput {
-  id: ID!
-  content: String!
 }

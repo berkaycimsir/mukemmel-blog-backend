@@ -1,0 +1,32 @@
+scalar Date
+scalar Int
+
+type Blog {
+  id: ID!
+  owner_id: ID!
+  title: String!
+  content: String!
+  summary: String!
+  tags: [String]!
+  likes: Int!
+  views: Int!
+  category: String!
+  img: String!
+  createdAt: Date!
+  user: User
+  comments: [Comment!]
+}
+
+type Query {
+  blog(id: ID!): BlogResolverReturnType!
+  getMostTrendBlog: BlogResolverReturnType!
+  getLastFourBlog: [Blog!]
+  getTrendBlogs: [Blog!]
+  getBlogByCategory(category: String!): [Blog!]
+  blogs: [Blog!]
+}
+
+type Mutation {
+  createBlog(data: createBlogInput!): BlogResolverReturnType!
+  deleteBlog(id: ID!): BlogResolverReturnType!
+}

@@ -1,0 +1,9 @@
+type UserQueryResolverReturnType {
+  user: User
+  errorMessage: String!
+}
+
+type UserMutationResolverReturnType {
+  token: Token!
+  errorMessage: String!
+}
