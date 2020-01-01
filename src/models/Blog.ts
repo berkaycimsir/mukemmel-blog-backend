@@ -1,5 +1,4 @@
 import mongoose, { Schema, Document } from "mongoose";
-import { StringifyOptions } from "querystring";
 
 // my typescript interface for my Database User model
 export interface IBlog extends Document {

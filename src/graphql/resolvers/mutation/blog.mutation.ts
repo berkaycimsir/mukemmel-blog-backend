@@ -1,5 +1,5 @@
+import { IBlogResolverReturnType } from "./../../../@types/ReturnTypes";
 import { IMutationType } from "../../../@types/ResolverTypes";
-import { IBlogResolverReturnType } from "../../../@types/ReturnTypes";
 import Blog, { IBlog } from "./../../../models/Blog";
 
 export const blogMutation: IMutationType = {
@@ -80,6 +80,50 @@ export const blogMutation: IMutationType = {
 
     return {
       blog: createdBlog,
+      errorMessage: "No error."
+    };
+  },
+  updateBlog: async (_, { data }): Promise<IBlogResolverReturnType> => {
+    const {
+      blog_id,
+      title,
+      content,
+      summary,
+      tags,
+      category,
+      img
+    }: {
+      blog_id: string;
+      title?: string;
+      content?: string;
+      summary?: string;
+      tags?: [string];
+      category?: string;
+      img?: string;
+    } = data;
+
+    const blog: IBlog = await Blog.findById(blog_id);
+
+    if (!blog) {
+      return {
+        blog: null,
+        errorMessage: "Blog does not exists."
+      };
+    }
+
+    const newBlogData: any = {
+      title: title ? title : blog.title,
+      content: content ? content.toString() : blog.content,
+      summary: summary ? summary : blog.summary,
+      tags: tags ? tags : blog.tags,
+      category: category ? category : blog.category,
+      img: img ? img : blog.img
+    };
+
+    await Blog.updateOne(blog, newBlogData);
+
+    return {
+      blog: newBlogData,
       errorMessage: "No error."
     };
   },

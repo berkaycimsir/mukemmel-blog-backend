@@ -7,3 +7,13 @@ input createBlogInput {
   category: String!
   img: String!
 }
+
+input updateBlogInput {
+  blog_id: ID!
+  title: String
+  content: String
+  summary: String
+  tags: [String!]
+  category: String
+  img: String
+}

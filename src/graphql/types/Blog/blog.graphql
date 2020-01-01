@@ -28,5 +28,6 @@ type Query {
 
 type Mutation {
   createBlog(data: createBlogInput!): BlogResolverReturnType!
+  updateBlog(data: updateBlogInput!): BlogResolverReturnType!
   deleteBlog(id: ID!): BlogResolverReturnType!
 }

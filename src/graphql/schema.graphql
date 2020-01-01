@@ -10,6 +10,7 @@
 # import Blog from "./types/Blog/blog.graphql";
 # import Mutation from "./types/Blog/blog.graphql";
 # import createBlogInput from "./types/Blog/inputs.graphql";
+# import updateBlogInput from "./types/Blog/inputs.graphql";
 # import BlogResolverReturnType from "./types/Blog/returnType.graphql";
 
 # import Query from "./types/Comment/comment.graphql";
