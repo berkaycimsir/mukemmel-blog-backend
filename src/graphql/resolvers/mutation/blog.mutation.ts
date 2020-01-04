@@ -1,3 +1,4 @@
+import Comment, { IComment } from "./../../../models/Comment";
 import { IBlogResolverReturnType } from "./../../../@types/ReturnTypes";
 import { IMutationType } from "../../../@types/ResolverTypes";
 import Blog, { IBlog } from "./../../../models/Blog";
@@ -132,6 +133,8 @@ export const blogMutation: IMutationType = {
 
     const blog: IBlog = await Blog.findById(id);
 
+    const blogComments: any = Comment.find({ blog_id: id });
+
     if (!blog) {
       return {
         blog: null,
@@ -139,7 +142,8 @@ export const blogMutation: IMutationType = {
       };
     }
 
-    await Blog.remove(blog);
+    await Comment.deleteMany(blogComments);
+    await Blog.deleteOne(blog);
 
     return {
       blog: null,
