@@ -1,5 +1,6 @@
 scalar Date
 scalar Int
+scalar Boolean
 
 type Blog {
   id: ID!
@@ -29,5 +30,6 @@ type Query {
 type Mutation {
   createBlog(data: createBlogInput!): BlogResolverReturnType!
   updateBlog(data: updateBlogInput!): BlogResolverReturnType!
+  updateBlogViews(id: ID!): Boolean!
   deleteBlog(id: ID!): BlogResolverReturnType!
 }

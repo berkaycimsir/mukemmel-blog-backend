@@ -128,6 +128,19 @@ export const blogMutation: IMutationType = {
       errorMessage: "No error."
     };
   },
+  updateBlogViews: async (_, args): Promise<boolean> => {
+    const { id }: { id: string } = args;
+
+    const blog: IBlog = await Blog.findById(id);
+
+    if (!blog) {
+      return false;
+    }
+
+    await blog.update({ views: blog.views + 1 });
+
+    return true;
+  },
   deleteBlog: async (_, args): Promise<IBlogResolverReturnType> => {
     const { id }: { id: string } = args;
 
