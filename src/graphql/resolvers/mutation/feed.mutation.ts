@@ -47,5 +47,18 @@ export const feedMutation: IMutationType = {
     });
 
     return true;
+  },
+  deleteFeed: async (_, args): Promise<boolean> => {
+    const { id }: { id: string } = args;
+
+    const feed = await Feed.findById(id);
+
+    if (!feed) {
+      return false;
+    }
+
+    await Feed.deleteOne(feed);
+
+    return true;
   }
 };
