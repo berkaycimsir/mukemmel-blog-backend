@@ -1,0 +1,10 @@
+input addFeedInput {
+  blog_id: ID!
+  user_id: ID!
+  content: String!
+}
+
+input updateFeedInput {
+  id: ID!
+  content: String!
+}

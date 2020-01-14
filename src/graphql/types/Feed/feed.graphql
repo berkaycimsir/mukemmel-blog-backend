@@ -1,0 +1,24 @@
+scalar Date
+scalar Int
+scalar Boolean
+
+type Feed {
+  id: ID!
+  blog_id: ID!
+  user_id: ID!
+  content: String!
+  likes: Int!
+  createdAt: Date!
+}
+
+type Query {
+  feed(id: ID!): FeedResolverReturnType!
+  feeds: [Feed!]
+}
+
+type Mutation {
+  addFeed(data: createFeedInput!): FeedResolverReturnType!
+  deleteFeed(id: ID!): Boolean!
+  updateFeed(data: updateFeedInput!): Boolean!
+  likeFeed(id: ID!, isUnliking: Boolean!): Boolean!
+}

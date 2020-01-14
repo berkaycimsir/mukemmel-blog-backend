@@ -1,4 +1,4 @@
-import { User, Blog, Comment } from "./DatabaseModelTypes";
+import { User, Blog, Comment, Feed } from "./DatabaseModelTypes";
 
 type Token = {
   token: string;
@@ -21,5 +21,10 @@ export interface IBlogResolverReturnType {
 
 export interface ICommentResolverReturnType {
   comment: Comment;
+  errorMessage: string;
+}
+
+export interface IFeedResolverReturnType {
+  feed: Feed;
   errorMessage: string;
 }

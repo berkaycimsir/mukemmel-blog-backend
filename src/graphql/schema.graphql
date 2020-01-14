@@ -20,4 +20,11 @@
 # import updateCommentInput from "./types/Comment/inputs.graphql";
 # import CommentResolverReturnType from "./types/Comment/returnType.graphql";
 
+# import Query from "./types/Feed/feed.graphql";
+# import Feed from "./types/Feed/feed.graphql";
+# import Mutation from "./types/Feed/feed.graphql";
+# import addFeedInput from "./types/Feed/inputs.graphql";
+# import updateFeedInput from "./types/Feed/inputs.graphql";
+# import FeedResolverReturnType from "./types/Feed/returnType.graphql";
+
 # import Token from "./types/Token/token.graphql";
