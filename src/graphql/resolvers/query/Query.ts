@@ -1,3 +1,5 @@
+import Feed, { IFeed } from "./../../../models/Feed";
+import { IFeedResolverReturnType } from "./../../../@types/ReturnTypes";
 import { IQueryType } from "../../../@types/ResolverTypes";
 import User, { IUser } from "../../../models/User";
 import Blog, { IBlog } from "../../../models/Blog";
@@ -85,8 +87,9 @@ export const Query: IQueryType = {
   getTrendBlogs: async (): Promise<IBlog[]> => {
     const allBlogs: IBlog[] = await Blog.find({});
 
-    const trendBlogs = allBlogs
-      .sort((a, b) => Number(a.views) > Number(b.views) && -1);
+    const trendBlogs = allBlogs.sort(
+      (a, b) => Number(a.views) > Number(b.views) && -1
+    );
 
     return trendBlogs.slice(0, 4);
   },
@@ -158,5 +161,33 @@ export const Query: IQueryType = {
       comment,
       errorMessage: "No error."
     };
+  },
+
+  // feed queries
+  feed: async (parent, args): Promise<IFeedResolverReturnType> => {
+    const { id }: { id: string } = args;
+
+    const feed: IFeed = await Feed.findById(id);
+
+    if (!feed) {
+      return {
+        feed: null,
+        errorMessage: "Feed does not found."
+      };
+    }
+
+    return {
+      feed,
+      errorMessage: "No error."
+    };
+  },
+  feeds: async (): Promise<IFeed[]> => {
+    const feeds: IFeed[] = await Feed.find({});
+
+    const sortedFeeds: IFeed[] = feeds.sort(
+      (a, b) => Number(a.createdAt) - Number(b.createdAt) > 0 && -1
+    );
+
+    return sortedFeeds;
   }
 };
