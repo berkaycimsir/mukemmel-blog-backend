@@ -1,6 +1,6 @@
 import { IFeedResolverReturnType } from "./../../../@types/ReturnTypes";
 import { IMutationType } from "../../../@types/ResolverTypes";
-import Feed from "../../../models/Feed";
+import Feed, { IFeed } from "../../../models/Feed";
 
 export const feedMutation: IMutationType = {
   addFeed: async (_, { data }): Promise<IFeedResolverReturnType> => {
@@ -58,6 +58,30 @@ export const feedMutation: IMutationType = {
     }
 
     await Feed.deleteOne(feed);
+
+    return true;
+  },
+  likeFeed: async (_, { id, isUnliking }): Promise<boolean> => {
+    const feed: IFeed = await Feed.findById(id);
+
+    if (!feed) {
+      return false;
+    }
+
+    const feedLikes: number = feed.likes;
+    let updatedFeedLike: number;
+
+    if (isUnliking === false) {
+      updatedFeedLike = feedLikes + 1;
+    }
+
+    if (isUnliking === true) {
+      updatedFeedLike = feedLikes - 1;
+    }
+
+    await Feed.findByIdAndUpdate(id, {
+      likes: updatedFeedLike
+    });
 
     return true;
   }
