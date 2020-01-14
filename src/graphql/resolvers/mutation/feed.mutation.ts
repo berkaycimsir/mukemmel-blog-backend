@@ -32,5 +32,20 @@ export const feedMutation: IMutationType = {
       feed: createdFeed,
       errorMessage: "No error."
     };
+  },
+  updateFeed: async (_, { data }): Promise<boolean> => {
+    const { id, content }: { id: string; content: string } = data;
+
+    const feed = await Feed.findById(id);
+
+    if (!feed) {
+      return false;
+    }
+
+    await Feed.findByIdAndUpdate(id, {
+      content
+    });
+
+    return true;
   }
 };
