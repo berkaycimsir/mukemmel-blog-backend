@@ -4,7 +4,7 @@ scalar Boolean
 
 type Feed {
   id: ID!
-  blog_id: ID!
+  blog_id: String!
   user_id: ID!
   content: String!
   likes: Int!
@@ -17,7 +17,7 @@ type Query {
 }
 
 type Mutation {
-  addFeed(data: createFeedInput!): FeedResolverReturnType!
+  addFeed(data: addFeedInput!): FeedResolverReturnType!
   deleteFeed(id: ID!): Boolean!
   updateFeed(data: updateFeedInput!): Boolean!
   likeFeed(id: ID!, isUnliking: Boolean!): Boolean!

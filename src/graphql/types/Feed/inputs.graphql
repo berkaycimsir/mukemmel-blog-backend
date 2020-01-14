@@ -1,5 +1,5 @@
 input addFeedInput {
-  blog_id: ID!
+  blog_id: String
   user_id: ID!
   content: String!
 }
