@@ -9,6 +9,7 @@ type Feed {
   content: String!
   likes: Int!
   createdAt: Date!
+  user: User!
 }
 
 type Query {
