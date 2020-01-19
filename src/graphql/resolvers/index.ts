@@ -1,4 +1,4 @@
-import { Feed } from "./query/Feed";
+import { Feeds } from "./query/Feed";
 import { User } from "./query/User";
 import { Query } from "./query/Query";
 import { Blog } from "./query/Blog";
@@ -10,7 +10,7 @@ const resolvers = {
   Blog,
   User,
   Comment,
-  Feed,
+  Feed: Feeds,
   Mutation
 };
 

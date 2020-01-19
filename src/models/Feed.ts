@@ -4,6 +4,7 @@ import mongoose, { Schema, Document } from "mongoose";
 export interface IFeed extends Document {
   user_id: string;
   blog_id: string;
+  reply_id: string;
   content: string;
   likes: number;
   createdAt: Date;
@@ -13,6 +14,7 @@ export interface IFeed extends Document {
 const FeedSchema: Schema = new Schema({
   user_id: { type: String, required: true },
   blog_id: { type: String, default: "no blog", required: false },
+  reply_id: { type: String, default: "not a reply", required: false },
   content: { type: String, required: true, maxlength: 300 },
   likes: { type: Number, default: 0 },
   createdAt: { type: Date, default: Date.now() }

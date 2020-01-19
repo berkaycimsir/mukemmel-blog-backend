@@ -7,10 +7,12 @@ export const feedMutation: IMutationType = {
     const {
       blog_id,
       user_id,
+      reply_id,
       content
     }: {
       blog_id?: string;
       user_id: string;
+      reply_id?: string;
       content: string;
     } = data;
 
@@ -24,6 +26,7 @@ export const feedMutation: IMutationType = {
     const createdFeed = await Feed.create({
       blog_id,
       user_id,
+      reply_id,
       content,
       createdAt: new Date(Date.now())
     });

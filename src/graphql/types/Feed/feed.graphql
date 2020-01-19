@@ -6,10 +6,12 @@ type Feed {
   id: ID!
   blog_id: String!
   user_id: ID!
+  reply_id: String!
   content: String!
   likes: Int!
   createdAt: Date!
   user: User!
+  replies: [Feed!]
 }
 
 type Query {
