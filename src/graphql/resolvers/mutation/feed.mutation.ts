@@ -60,6 +60,7 @@ export const feedMutation: IMutationType = {
       return false;
     }
 
+    await Feed.deleteMany({ reply_id: id });
     await Feed.deleteOne(feed);
 
     return true;
