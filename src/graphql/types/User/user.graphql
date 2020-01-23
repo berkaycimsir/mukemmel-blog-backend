@@ -13,6 +13,7 @@ type User {
   admin: Boolean
   comments: [Comment!]
   blogs: [Blog!]
+  feeds: [Feed!]
 }
 
 type Query {
