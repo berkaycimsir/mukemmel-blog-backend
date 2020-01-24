@@ -121,5 +121,43 @@ export const userMutation: IMutationType = {
       },
       errorMessage: "No error."
     };
+  },
+  update: async (parent, { data }): Promise<boolean> => {
+    const {
+      id,
+      name,
+      surname,
+      username,
+      email,
+      gender
+    }: {
+      id: string;
+      name: string;
+      surname: string;
+      username: string;
+      email: string;
+      gender: string;
+    } = data;
+
+    const user: IUser = await User.findById(id);
+
+    if (!user) {
+      return false;
+    }
+
+    const newUserData: { [key: string]: any } = {
+      name: name ? name : user.name,
+      surname: surname ? surname : user.surname,
+      username: username ? username : user.username,
+      email: email ? email : user.email,
+      password: user.password,
+      gender: gender ? gender : user.gender,
+      admin: user.admin,
+      createdAt: user.createdAt
+    };
+
+    await User.findByIdAndUpdate(id, newUserData);
+
+    return true;
   }
 };

@@ -12,3 +12,12 @@ input loginInput {
   username: String!
   password: String!
 }
+
+input updateInput {
+  id: ID!
+  name: String
+  surname: String
+  username: String
+  email: String
+  gender: String
+}
