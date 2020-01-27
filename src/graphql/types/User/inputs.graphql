@@ -21,3 +21,10 @@ input updateInput {
   email: String
   gender: String
 }
+
+input sendMailInput {
+  name: String!
+  email: String!
+  subject: String
+  message: String
+}

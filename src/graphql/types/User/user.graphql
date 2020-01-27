@@ -26,4 +26,5 @@ type Mutation {
   register(data: registerInput!): UserMutationResolverReturnType!
   login(data: loginInput!): UserMutationResolverReturnType!
   update(data: updateInput!): Boolean!
+  sendMail(data: sendMailInput!): Boolean!
 }

@@ -2,7 +2,7 @@ import * as nodemailer from "nodemailer";
 import Mail = require("nodemailer/lib/mailer");
 
 interface IMailType {
-  send: (data: any) => void;
+  send: (data: IData) => void;
 }
 
 interface IData {
@@ -31,10 +31,14 @@ const mail: IMailType = {
       to: `${process.env.MAIL_USER}`,
       subject: `${subject}`,
       html: `
-        <h1>Berkay'ın Bloğu İletişim Aracından Bir Mesaj!</h1>
+        <h1 style="font-size: 20px;">Berkay'ın Bloğu İletişim Aracından Bir Mesaj!</h1>
         <ul>
-          <li>Gönderen: ${name}</li>
-          <li>Gönderenin Emaili: ${email}</li>
+          <li>
+            <b>Gönderen:</b> ${name}
+          </li>
+          <li>
+            <b>Gönderenin Emaili:</b> ${email}
+          </li>
         </ul>
         <br />
         <b>Mesaj: </b>

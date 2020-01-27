@@ -3,6 +3,7 @@ import { IMutationType } from "../../../@types/ResolverTypes";
 import { IUserMutationResolverReturnType } from "../../../@types/ReturnTypes";
 import User, { IUser } from "../../../models/User";
 import token from "../../../helpers/token";
+import mail from "../../../helpers/sendMail";
 
 export const userMutation: IMutationType = {
   register: async (_, { data }): Promise<IUserMutationResolverReturnType> => {
@@ -157,6 +158,23 @@ export const userMutation: IMutationType = {
     };
 
     await User.findByIdAndUpdate(id, newUserData);
+
+    return true;
+  },
+  sendMail: async (parent, { data }): Promise<boolean> => {
+    const {
+      name,
+      email
+    }: {
+      name: string;
+      email: string;
+    } = data;
+
+    if (!email || !name) {
+      return false;
+    }
+
+    mail.send(data);
 
     return true;
   }
