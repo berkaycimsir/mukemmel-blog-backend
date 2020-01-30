@@ -61,7 +61,7 @@ server.applyMiddleware({
   }
 });
 
-// starting server
+// starting server on port 4000
 app.listen(process.env.PORT || 4000, () => {
   console.log(`Server started onn port ${process.env.PORT || 4000}`);
 });
