@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document } from "mongoose";
 
-// my typescript interface for my Database User model
+// my typescript interface for my Database Blog model
 export interface IBlog extends Document {
   owner_id: string;
   title: string;

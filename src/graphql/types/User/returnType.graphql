@@ -1,8 +1,10 @@
+# define a return type for user queries
 type UserQueryResolverReturnType {
   user: User
   errorMessage: String!
 }
 
+# define a return type for user mutations
 type UserMutationResolverReturnType {
   token: Token!
   errorMessage: String!

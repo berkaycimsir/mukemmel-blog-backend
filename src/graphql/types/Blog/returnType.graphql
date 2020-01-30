@@ -1,3 +1,4 @@
+# define a return type for blog resolvers
 type BlogResolverReturnType {
   blog: Blog
   errorMessage: String!

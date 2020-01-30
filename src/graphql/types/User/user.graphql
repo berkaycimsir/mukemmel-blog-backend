@@ -1,6 +1,8 @@
+# scalars
 scalar Date
 scalar Boolean
 
+# user type for graphql
 type User {
   id: ID!
   name: String!
@@ -16,12 +18,14 @@ type User {
   feeds: [Feed!]
 }
 
+# queries for user type
 type Query {
   user(id: ID!): UserQueryResolverReturnType!
   activeUser: UserQueryResolverReturnType!
   users: [User!]
 }
 
+# mutations for user type
 type Mutation {
   register(data: registerInput!): UserMutationResolverReturnType!
   login(data: loginInput!): UserMutationResolverReturnType!

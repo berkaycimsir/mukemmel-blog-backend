@@ -1,9 +1,12 @@
+import Feed, { IFeed } from "./../../../models/Feed";
 import Comment, { IComment } from "./../../../models/Comment";
 import { IBlogResolverReturnType } from "./../../../@types/ReturnTypes";
 import { IMutationType } from "../../../@types/ResolverTypes";
 import Blog, { IBlog } from "./../../../models/Blog";
 
+// export mutations of blog for use.
 export const blogMutation: IMutationType = {
+  // creating blog
   createBlog: async (_, { data }): Promise<IBlogResolverReturnType> => {
     const {
       owner_id,
@@ -23,12 +26,15 @@ export const blogMutation: IMutationType = {
       img: string;
     } = data;
 
+    // finding blog by title
     const blog: IBlog = await Blog.findOne({
       title: title.toUpperCase() || title
     });
 
+    // finding blog by img
     const findBlogByImg = await Blog.findOne({ img });
 
+    // if there is a blog with title that comes as a parameter
     if (blog) {
       return {
         blog: null,
@@ -36,6 +42,7 @@ export const blogMutation: IMutationType = {
       };
     }
 
+    // if there is a blog with an img that comes as a parameter
     if (findBlogByImg) {
       return {
         blog: null,
@@ -43,6 +50,7 @@ export const blogMutation: IMutationType = {
       };
     }
 
+    // if length of title greater then 40
     if (title.length > 40) {
       return {
         blog: null,
@@ -50,6 +58,7 @@ export const blogMutation: IMutationType = {
       };
     }
 
+    // if length of content greater then 10000
     if (content.length > 10000) {
       return {
         blog: null,
@@ -57,6 +66,7 @@ export const blogMutation: IMutationType = {
       };
     }
 
+    // if length of summary greater then 200
     if (summary.length > 200) {
       return {
         blog: null,
@@ -64,6 +74,7 @@ export const blogMutation: IMutationType = {
       };
     }
 
+    // creating blog
     await Blog.create({
       owner_id,
       title: title.toUpperCase(),
@@ -75,6 +86,7 @@ export const blogMutation: IMutationType = {
       createdAt: new Date(Date.now())
     });
 
+    // getting created blog data
     const createdBlog: IBlog = await Blog.findOne({
       title: title.toUpperCase()
     });
@@ -84,6 +96,7 @@ export const blogMutation: IMutationType = {
       errorMessage: "No error."
     };
   },
+  // updating blog
   updateBlog: async (_, { data }): Promise<IBlogResolverReturnType> => {
     const {
       blog_id,
@@ -103,8 +116,10 @@ export const blogMutation: IMutationType = {
       img?: string;
     } = data;
 
+    // finding blog by the given id
     const blog: IBlog = await Blog.findById(blog_id);
 
+    // if there is no blog
     if (!blog) {
       return {
         blog: null,
@@ -112,6 +127,7 @@ export const blogMutation: IMutationType = {
       };
     }
 
+    // gathering new blog's data in an object
     const newBlogData: any = {
       title: title ? title : blog.title,
       content: content ? content.toString() : blog.content,
@@ -121,6 +137,7 @@ export const blogMutation: IMutationType = {
       img: img ? img : blog.img
     };
 
+    // updating user
     await Blog.updateOne(blog, newBlogData);
 
     return {
@@ -128,26 +145,38 @@ export const blogMutation: IMutationType = {
       errorMessage: "No error."
     };
   },
+  // updating views of blog
   updateBlogViews: async (_, args): Promise<boolean> => {
     const { id }: { id: string } = args;
 
+    // finding a blog by the given id
     const blog: IBlog = await Blog.findById(id);
 
+    // if there is no blog
     if (!blog) {
       return false;
     }
 
-    await blog.update({ views: blog.views + 1 });
+    // updating blog
+    await blog.updateOne({ views: blog.views + 1 });
 
+    // returns success
     return true;
   },
+  // deleting blog
   deleteBlog: async (_, args): Promise<IBlogResolverReturnType> => {
     const { id }: { id: string } = args;
 
+    // finding blog by the given id
     const blog: IBlog = await Blog.findById(id);
 
-    const blogComments: any = Comment.find({ blog_id: id });
+    // finding comments of blog
+    const blogComments: any = await Comment.find({ blog_id: id });
 
+    // finding feeds of blog
+    const blogFeeds: IFeed[] = await Feed.find({ blog_id: id });
+
+    // if there is no blog
     if (!blog) {
       return {
         blog: null,
@@ -155,7 +184,11 @@ export const blogMutation: IMutationType = {
       };
     }
 
+    // deleting comments of blog
     await Comment.deleteMany(blogComments);
+    // deleting feeds of blog
+    await Feed.deleteMany(blogFeeds);
+    // deleting blog
     await Blog.deleteOne(blog);
 
     return {

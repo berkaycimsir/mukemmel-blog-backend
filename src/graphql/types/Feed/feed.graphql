@@ -1,7 +1,9 @@
+# scalars
 scalar Date
 scalar Int
 scalar Boolean
 
+# feed type
 type Feed {
   id: ID!
   blog_id: String!
@@ -15,11 +17,13 @@ type Feed {
   blog: Blog
 }
 
+# query resolvers for feed type
 type Query {
   feed(id: ID!): FeedResolverReturnType!
   feeds: [Feed!]
 }
 
+# mutation resolvers for feed type
 type Mutation {
   addFeed(data: addFeedInput!): FeedResolverReturnType!
   deleteFeed(id: ID!): Boolean!

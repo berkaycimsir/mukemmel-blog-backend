@@ -1,3 +1,4 @@
+# define a return type for comment resolvers
 type CommentResolverReturnType {
   comment: Comment
   errorMessage: String!

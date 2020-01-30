@@ -34,6 +34,7 @@ const server: ApolloServer = new ApolloServer({
   playground: true
 });
 
+// authorization middleware
 app.use((req, res, next) => {
   const { authorization } = req.headers;
   const token: any = authorization;

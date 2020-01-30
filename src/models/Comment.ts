@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document } from "mongoose";
 
-// my typescript interface for my Database User model
+// my typescript interface for my Database Comment model
 export interface IComment extends Document {
   blog_id: string;
   user_id: string;

@@ -1,3 +1,4 @@
+# addFeedInput for addFeed mutation
 input addFeedInput {
   blog_id: String
   reply_id: String
@@ -5,6 +6,7 @@ input addFeedInput {
   content: String!
 }
 
+# updateFeedInput for feed update mutation
 input updateFeedInput {
   id: ID!
   content: String!

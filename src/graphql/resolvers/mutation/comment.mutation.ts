@@ -2,7 +2,9 @@ import { ICommentResolverReturnType } from "./../../../@types/ReturnTypes";
 import { IMutationType } from "../../../@types/ResolverTypes";
 import Comment, { IComment } from "../../../models/Comment";
 
+// exports mutations of comment type for use
 export const commentMutation: IMutationType = {
+  // creating comment
   createComment: async (_, { data }): Promise<ICommentResolverReturnType> => {
     const {
       blog_id,
@@ -14,6 +16,7 @@ export const commentMutation: IMutationType = {
       content: string;
     } = data;
 
+    // if there is a comment with a user_id and blog_id that comes as a parameter
     const comment = await Comment.findOne({ user_id, blog_id });
 
     if (comment) {
@@ -23,6 +26,7 @@ export const commentMutation: IMutationType = {
       };
     }
 
+    // if lenght of content greater then 100
     if (content.length > 100) {
       return {
         comment: null,
@@ -30,6 +34,7 @@ export const commentMutation: IMutationType = {
       };
     }
 
+    // creating comment
     const createdComment = await Comment.create({
       blog_id,
       user_id,
@@ -37,14 +42,18 @@ export const commentMutation: IMutationType = {
       createdAt: new Date(Date.now())
     });
 
+    // returns new comment data
     return {
       comment: createdComment,
       errorMessage: "No error."
     };
   },
+  // deleting comment
   deleteComment: async (_, { id }): Promise<ICommentResolverReturnType> => {
+    // finding a comment by the given id
     const comment: IComment = await Comment.findById(id);
 
+    // if there is no comment
     if (!comment) {
       return {
         comment: null,
@@ -52,18 +61,22 @@ export const commentMutation: IMutationType = {
       };
     }
 
-    await Comment.remove(comment);
+    // deleting comment
+    await Comment.deleteOne(comment);
 
     return {
       comment: null,
       errorMessage: "No error."
     };
   },
+  // updating comment
   updateComment: async (_, { data }): Promise<ICommentResolverReturnType> => {
     const { id, content }: { id: string; content: string } = data;
 
+    // finding a comment by the given id
     const comment = await Comment.findById(id);
 
+    // if there is no comment
     if (!comment) {
       return {
         comment: null,
@@ -71,6 +84,7 @@ export const commentMutation: IMutationType = {
       };
     }
 
+    // updating comment
     return {
       comment: await Comment.findByIdAndUpdate(id, {
         content
@@ -78,12 +92,15 @@ export const commentMutation: IMutationType = {
       errorMessage: "No error."
     };
   },
+  // liking comment
   likeComment: async (
     _,
     { id, isUnliking }
   ): Promise<ICommentResolverReturnType> => {
+    // finding comment by the given id
     const comment = await Comment.findById(id);
 
+    // if there is no comment
     if (!comment) {
       return {
         comment: null,
@@ -91,17 +108,21 @@ export const commentMutation: IMutationType = {
       };
     }
 
+    // getting likes of comment
     const commentLikes = comment.likes;
     let updatedCommentLike: number;
 
+    // if user is liking comment
     if (isUnliking === false) {
       updatedCommentLike = commentLikes + 1;
     }
 
+    // if user is unliking comment
     if (isUnliking === true) {
       updatedCommentLike = commentLikes - 1;
     }
 
+    // updating user likes
     return {
       comment: await Comment.findByIdAndUpdate(id, {
         likes: updatedCommentLike

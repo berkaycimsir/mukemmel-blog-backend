@@ -5,6 +5,7 @@ import { Blog } from "./query/Blog";
 import { Comment } from "./query/Comment";
 import { Mutation } from "./mutation/index";
 
+// all resolvers gathered in one object
 const resolvers = {
   Query,
   Blog,
@@ -14,4 +15,5 @@ const resolvers = {
   Mutation
 };
 
+// exports resolvers for use
 export default resolvers;

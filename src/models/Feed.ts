@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document } from "mongoose";
 
-// my typescript interface for my Database User model
+// my typescript interface for my Database Feed model
 export interface IFeed extends Document {
   user_id: string;
   blog_id: string;

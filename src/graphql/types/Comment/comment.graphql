@@ -1,7 +1,9 @@
+# scalars
 scalar Date
 scalar Int
 scalar Boolean
 
+# comment type
 type Comment {
   id: ID!
   blog_id: ID!
@@ -13,12 +15,14 @@ type Comment {
   blog: Blog
 }
 
+# query resolvers for comment type
 type Query {
   comment(id: ID!): CommentResolverReturnType!
   comments: [Comment!]
   getCommentByUserId(user_id: ID!, blog_id: ID!): CommentResolverReturnType!
 }
 
+# mutation resolvers for comment type
 type Mutation {
   createComment(data: createCommentInput!): CommentResolverReturnType!
   deleteComment(id: ID!): CommentResolverReturnType!

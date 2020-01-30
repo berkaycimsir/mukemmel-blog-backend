@@ -1,3 +1,4 @@
+# registerInput for user register mutation
 input registerInput {
   name: String!
   surname: String!
@@ -8,11 +9,13 @@ input registerInput {
   admin: Boolean
 }
 
+# loginInput for user login mutation
 input loginInput {
   username: String!
   password: String!
 }
 
+# updateInput for user update mutation
 input updateInput {
   id: ID!
   name: String
@@ -22,6 +25,7 @@ input updateInput {
   gender: String
 }
 
+# sendMail input for contact mutation
 input sendMailInput {
   name: String!
   email: String!

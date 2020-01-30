@@ -5,7 +5,9 @@ import User, { IUser } from "../../../models/User";
 import token from "../../../helpers/token";
 import mail from "../../../helpers/sendMail";
 
+// exports mutations of user for use
 export const userMutation: IMutationType = {
+  // creating a user
   register: async (_, { data }): Promise<IUserMutationResolverReturnType> => {
     const {
       name,
@@ -25,16 +27,19 @@ export const userMutation: IMutationType = {
       admin: boolean;
     } = data;
 
+    // if there is a user with a username and mail that comes as a parameter
     const authBoth: IUser = await User.findOne({ username, email }).then(
       data => {
         return data;
       }
     );
 
+    // if there is a user with a username that comes as a parameter
     const authUsername: IUser = await User.findOne({ username }).then(data => {
       return data;
     });
 
+    // if there is a user with a email that comes as a parameter
     const authEmail: IUser = await User.findOne({ email }).then(data => {
       return data;
     });
@@ -66,8 +71,10 @@ export const userMutation: IMutationType = {
       };
     }
 
+    // hashing password by using bcrypt that comes as a parameter
     const hashedPassword: string = bcrypt.hashSync(password, 10);
 
+    // creating a new user
     const newUser = await User.create({
       name,
       surname,
@@ -78,6 +85,7 @@ export const userMutation: IMutationType = {
       admin
     });
 
+    // returns a token and error message
     return {
       token: {
         token: token.generate(newUser, "12h")
@@ -85,6 +93,7 @@ export const userMutation: IMutationType = {
       errorMessage: "No error."
     };
   },
+  // logging a user
   login: async (_, { data }): Promise<IUserMutationResolverReturnType> => {
     const {
       username,
@@ -94,8 +103,10 @@ export const userMutation: IMutationType = {
       password: string;
     } = data;
 
+    // finding user with a username that comes as a parameter
     const user: IUser = await User.findOne({ username });
 
+    // if there is no user
     if (!user) {
       return {
         token: {
@@ -105,8 +116,10 @@ export const userMutation: IMutationType = {
       };
     }
 
+    // compare user password with password that comes as a parameter
     const validPassword: boolean = bcrypt.compareSync(password, user.password);
 
+    // if password is not valid
     if (validPassword === false) {
       return {
         token: {
@@ -116,6 +129,7 @@ export const userMutation: IMutationType = {
       };
     }
 
+    // returns a token and error message
     return {
       token: {
         token: token.generate(user, "12h")
@@ -123,6 +137,7 @@ export const userMutation: IMutationType = {
       errorMessage: "No error."
     };
   },
+  // updating a user
   update: async (parent, { data }): Promise<boolean> => {
     const {
       id,
@@ -140,12 +155,15 @@ export const userMutation: IMutationType = {
       gender: string;
     } = data;
 
+    // finding user by the given id
     const user: IUser = await User.findById(id);
 
+    // if there is no user
     if (!user) {
       return false;
     }
 
+    // gathering new user's data in an object
     const newUserData: { [key: string]: any } = {
       name: name ? name : user.name,
       surname: surname ? surname : user.surname,
@@ -157,10 +175,13 @@ export const userMutation: IMutationType = {
       createdAt: user.createdAt
     };
 
+    // updating user
     await User.findByIdAndUpdate(id, newUserData);
 
+    // returns success
     return true;
   },
+  // sending contact mail
   sendMail: async (parent, { data }): Promise<boolean> => {
     const {
       name,
@@ -170,12 +191,15 @@ export const userMutation: IMutationType = {
       email: string;
     } = data;
 
+    // if there is no email or name it will returns false
     if (!email || !name) {
       return false;
     }
 
+    // sending mail
     mail.send(data);
 
+    // returns success
     return true;
   }
 };

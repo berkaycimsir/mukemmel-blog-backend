@@ -1,3 +1,4 @@
+# createBlogInput for blog create function
 input createBlogInput {
   owner_id: ID!
   title: String!
@@ -8,6 +9,7 @@ input createBlogInput {
   img: String!
 }
 
+# updateBlogInput for blog update function
 input updateBlogInput {
   blog_id: ID!
   title: String

@@ -10,8 +10,10 @@ import {
   IUserQueryResolverReturnType
 } from "../../../@types/ReturnTypes";
 
+// export queries for use
 export const Query: IQueryType = {
   // user queries
+  // returns a user and error message by the given id
   user: async (_, { id }): Promise<IUserQueryResolverReturnType> => {
     const user: IUser = await User.findById(id);
 
@@ -27,6 +29,7 @@ export const Query: IQueryType = {
       errorMessage: "No error."
     };
   },
+  // returns all users
   users: async (): Promise<IUser[]> => {
     const users: IUser[] = await User.find({});
 
@@ -34,6 +37,7 @@ export const Query: IQueryType = {
       return Number(a.createdAt) - Number(b.createdAt) > 0 && -1;
     });
   },
+  // returns a current active user
   activeUser: async (
     parent,
     args,
@@ -53,6 +57,7 @@ export const Query: IQueryType = {
   },
 
   // blog queries
+  // returns a blog and error message by the given id
   blog: async (_, { id }): Promise<IBlogResolverReturnType> => {
     const blog: IBlog = await Blog.findById(id);
 
@@ -68,12 +73,14 @@ export const Query: IQueryType = {
       errorMessage: "No error."
     };
   },
+  // returns all user
   blogs: async (): Promise<IBlog[]> => {
     const blogs = await Blog.find({});
     return blogs.sort(
       (a, b) => Number(a.createdAt) - Number(b.createdAt) > 0 && -1
     );
   },
+  // Returns the last 4 blogs added to the database
   getLastFourBlog: async (): Promise<IBlog[]> => {
     const allBlogs: IBlog[] = await Blog.find({});
 
@@ -84,6 +91,7 @@ export const Query: IQueryType = {
     const blogs: IBlog[] = sortedBlogs.slice(0, 4);
     return blogs;
   },
+  // returns trend blogs
   getTrendBlogs: async (): Promise<IBlog[]> => {
     const allBlogs: IBlog[] = await Blog.find({});
 
@@ -93,6 +101,7 @@ export const Query: IQueryType = {
 
     return trendBlogs.slice(0, 4);
   },
+  // returns most trend blog in database
   getMostTrendBlog: async (): Promise<IBlogResolverReturnType> => {
     const allBlogs: IBlog[] = await Blog.find({});
 
@@ -110,6 +119,7 @@ export const Query: IQueryType = {
       errorMessage: "No error."
     };
   },
+  // returns blogs by the given category
   getBlogByCategory: async (_, args): Promise<IBlog[]> => {
     const { category }: { category: string } = args;
 
@@ -121,6 +131,7 @@ export const Query: IQueryType = {
   },
 
   // comment queries
+  // returns a comment and error message by the given id
   comment: async (_, { id }): Promise<ICommentResolverReturnType> => {
     const comment: IComment = await Comment.findById(id);
 
@@ -136,6 +147,7 @@ export const Query: IQueryType = {
       errorMessage: "No error."
     };
   },
+  // returns all comments
   comments: async (_): Promise<IComment[]> => {
     const comments: IComment[] = await Comment.find({});
     const sortedComments: IComment[] = comments
@@ -144,6 +156,7 @@ export const Query: IQueryType = {
 
     return sortedComments;
   },
+  // returns a comment and error message by the given user_id
   getCommentByUserId: async (
     parent,
     { user_id, blog_id }
@@ -164,6 +177,7 @@ export const Query: IQueryType = {
   },
 
   // feed queries
+  // returns a feed and errorMessage by the given id
   feed: async (parent, args): Promise<IFeedResolverReturnType> => {
     const { id }: { id: string } = args;
 
@@ -181,6 +195,7 @@ export const Query: IQueryType = {
       errorMessage: "No error."
     };
   },
+  // returns all feeds
   feeds: async (): Promise<IFeed[]> => {
     const feeds: IFeed[] = await Feed.find({});
 

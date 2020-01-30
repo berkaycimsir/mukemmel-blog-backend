@@ -1,3 +1,4 @@
+// typescript type for database user model
 export type User = {
   name: string;
   surname: string;
@@ -9,6 +10,7 @@ export type User = {
   admin: boolean;
 };
 
+// typescript type for database blog model
 export type Blog = {
   owner_id: string;
   title: string;
@@ -22,6 +24,7 @@ export type Blog = {
   createdAt: Date;
 };
 
+// typescript type for database comment model
 export type Comment = {
   id?: string;
   blog_id: string;

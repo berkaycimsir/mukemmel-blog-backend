@@ -1,10 +1,12 @@
 import * as nodemailer from "nodemailer";
 import Mail = require("nodemailer/lib/mailer");
 
+// mail type for mail variable
 interface IMailType {
   send: (data: IData) => void;
 }
 
+// interface for data parameter
 interface IData {
   name: string;
   email: string;
@@ -12,7 +14,12 @@ interface IData {
   message?: string;
 }
 
+// mail variable
 const mail: IMailType = {
+  /*
+   * this function takes the detail of mail as a parameter
+   * and sending mail by using this details.
+   */
   send: ({ name, email, subject, message }: IData): void => {
     const transporter: Mail = nodemailer.createTransport({
       host: "smtp-mail.outlook.com",

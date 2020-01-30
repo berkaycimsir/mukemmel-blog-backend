@@ -1,7 +1,9 @@
+# scalars
 scalar Date
 scalar Int
 scalar Boolean
 
+# blog type
 type Blog {
   id: ID!
   owner_id: ID!
@@ -18,6 +20,7 @@ type Blog {
   comments: [Comment!]
 }
 
+# query resolvers for blog type
 type Query {
   blog(id: ID!): BlogResolverReturnType!
   getMostTrendBlog: BlogResolverReturnType!
@@ -27,6 +30,7 @@ type Query {
   blogs: [Blog!]
 }
 
+# mutation resolvers for blog type
 type Mutation {
   createBlog(data: createBlogInput!): BlogResolverReturnType!
   updateBlog(data: updateBlogInput!): BlogResolverReturnType!

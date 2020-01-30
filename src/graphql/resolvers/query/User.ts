@@ -3,7 +3,9 @@ import { IQueryType } from "../../../@types/ResolverTypes";
 import Blog, { IBlog } from "../../../models/Blog";
 import Comment, { IComment } from "../../../models/Comment";
 
+// exports user queries for use
 export const User: IQueryType = {
+  // comments query for get comments of user
   comments: async (parent): Promise<IComment[]> => {
     const comments: IComment[] = await Comment.find({ user_id: parent.id });
     const sortedComments: IComment[] = comments.sort(
@@ -12,6 +14,7 @@ export const User: IQueryType = {
 
     return sortedComments;
   },
+  // blogs query for get blogs of user
   blogs: async (parent): Promise<IBlog[]> => {
     const blogs: IBlog[] = await Blog.find({ owner_id: parent.id });
     const sortedBlogs: IBlog[] = blogs.sort(
@@ -20,6 +23,7 @@ export const User: IQueryType = {
 
     return sortedBlogs;
   },
+  // feeds query for get feeds of user
   feeds: async (parent): Promise<IFeed[]> => {
     const feeds: IFeed[] = await Feed.find({ user_id: parent.id });
     const sortedFeeds: IFeed[] = feeds.sort(

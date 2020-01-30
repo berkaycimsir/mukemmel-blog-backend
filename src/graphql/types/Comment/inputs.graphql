@@ -1,9 +1,11 @@
+# createCommentInput for comment create mutation
 input createCommentInput {
   blog_id: ID!
   user_id: ID!
   content: String!
 }
 
+# updateCommentInput for comment update mutation
 input updateCommentInput {
   id: ID!
   content: String!
