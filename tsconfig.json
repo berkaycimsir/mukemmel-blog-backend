@@ -3,14 +3,20 @@
     "lib": [
       "ESNext"
     ],
-    "target": "ES5",
+    "target": "ES6",
     "module": "commonjs",
     "moduleResolution": "node",
     "outDir": "./build",
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "sourceMap": true,
     "esModuleInterop": true,
     "downlevelIteration": true
-  }
+  },
+  "exclude": [
+    "build",
+    "node_modules"
+  ],
 }

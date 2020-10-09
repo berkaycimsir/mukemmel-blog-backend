@@ -81,6 +81,8 @@ export const blogMutation: IMutationType = {
       content,
       summary,
       tags,
+      likes: 0,
+      views: 0,
       category,
       img,
       createdAt: new Date(Date.now())

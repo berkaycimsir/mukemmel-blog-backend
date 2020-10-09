@@ -38,6 +38,7 @@ export const commentMutation: IMutationType = {
     const createdComment = await Comment.create({
       blog_id,
       user_id,
+      likes: 0,
       content,
       createdAt: new Date(Date.now())
     });

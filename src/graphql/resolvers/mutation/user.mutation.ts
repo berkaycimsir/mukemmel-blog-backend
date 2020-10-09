@@ -80,6 +80,7 @@ export const userMutation: IMutationType = {
       surname,
       username,
       email,
+      createdAt: Date.now(),
       password: hashedPassword,
       gender,
       admin
