@@ -30,6 +30,7 @@ export const feedMutation: IMutationType = {
     const createdFeed = await Feed.create({
       blog_id,
       user_id,
+      likes: 0,
       reply_id,
       content,
       createdAt: new Date(Date.now())
