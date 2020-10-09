@@ -16,7 +16,8 @@
     "downlevelIteration": true
   },
   "exclude": [
-    "build",
-    "node_modules"
-  ],
+    "node_modules",
+    "wwwroot",
+    "Scripts/app"
+  ]
 }

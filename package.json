@@ -22,9 +22,10 @@
     "ts-node": "3.3.0",
     "tslint": "^5.20.1",
     "tslint-config-prettier": "^1.18.0",
-    "typescript": "3.3.3333"
+    "typescript": "3.3.1"
   },
   "dependencies": {
+    "apollo-server-core": "^2.18.2",
     "apollo-server-express": "^2.9.12",
     "bcrypt": "^3.0.7",
     "dotenv": "^8.2.0",
