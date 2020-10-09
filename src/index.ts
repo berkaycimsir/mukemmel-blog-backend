@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import express, { Application } from "express";
 import { GraphQLSchema } from "graphql";
 import { importSchema } from "graphql-import";
-import { makeExecutableSchema } from "graphql-tools";
+import { makeExecutableSchema, Request } from "graphql-tools";
 import * as jwt from "jsonwebtoken";
 // database connection function
 import databaseConnection from "./helpers/db";
@@ -46,6 +46,14 @@ app.use((req, res, next) => {
     } catch (error) {
       console.error(error);
     }
+  }
+
+  next();
+});
+
+app.use((req, res, next) => {
+  if (req.path !== "/graphql") {
+    res.redirect("/graphql");
   }
 
   next();
